@@ -15,10 +15,15 @@ namespace IFRTrainer.UI
         [Header("UI References")]
         [SerializeField] private RectTransform scopeArea;
         [SerializeField] private RectTransform aircraftIcon;
+        [SerializeField] private Image aircraftImage;
         [SerializeField] private RectTransform headingVector;
         [SerializeField] private Image selectedRadialLine;
         [SerializeField] private GameObject vorMarkerPrefab;
         [SerializeField] private TextMeshProUGUI scaleText;
+
+        [Header("Sprites")]
+        [SerializeField] private Sprite playerPlaneSprite;
+        [SerializeField] private Sprite vorMarkerSprite;
 
         [Header("Display Settings")]
         [SerializeField] private float scopeRadiusNM = 20f;
@@ -52,6 +57,28 @@ namespace IFRTrainer.UI
             }
 
             UpdateScaleText();
+            ApplySprites();
+        }
+
+        private void ApplySprites()
+        {
+            // Apply player plane sprite if available
+            if (aircraftImage != null && SpriteManager.Instance != null)
+            {
+                var sprite = SpriteManager.Instance.GetPlayerPlane();
+                if (sprite != null)
+                {
+                    aircraftImage.sprite = sprite;
+                    aircraftImage.color = Color.white; // Use sprite colors
+                    aircraftImage.preserveAspect = true;
+                }
+            }
+            else if (aircraftImage != null && playerPlaneSprite != null)
+            {
+                aircraftImage.sprite = playerPlaneSprite;
+                aircraftImage.color = Color.white;
+                aircraftImage.preserveAspect = true;
+            }
         }
 
         private void OnEnable()
@@ -103,24 +130,82 @@ namespace IFRTrainer.UI
 
         private void CreateVORMarker(VORStationData vor)
         {
-            if (vorMarkerPrefab == null || scopeArea == null)
+            if (scopeArea == null)
                 return;
 
-            GameObject markerObj = Instantiate(vorMarkerPrefab, scopeArea);
-            RectTransform marker = markerObj.GetComponent<RectTransform>();
+            GameObject markerObj;
 
-            // Set label
-            var label = markerObj.GetComponentInChildren<TextMeshProUGUI>();
-            if (label != null)
+            if (vorMarkerPrefab != null)
             {
-                label.text = vor.identifier;
+                markerObj = Instantiate(vorMarkerPrefab, scopeArea);
+            }
+            else
+            {
+                // Create marker dynamically
+                markerObj = new GameObject($"VOR_{vor.identifier}");
+                markerObj.transform.SetParent(scopeArea, false);
+
+                var rect = markerObj.AddComponent<RectTransform>();
+                rect.sizeDelta = new Vector2(32, 32);
+
+                var image = markerObj.AddComponent<Image>();
+
+                // Try to use sprite from SpriteManager
+                if (SpriteManager.Instance != null)
+                {
+                    var sprite = SpriteManager.Instance.GetVORMarker();
+                    if (sprite != null)
+                    {
+                        image.sprite = sprite;
+                        image.color = Color.white;
+                        image.preserveAspect = true;
+                    }
+                    else
+                    {
+                        image.color = vorColor;
+                    }
+                }
+                else if (vorMarkerSprite != null)
+                {
+                    image.sprite = vorMarkerSprite;
+                    image.color = Color.white;
+                }
+                else
+                {
+                    image.color = vorColor;
+                }
+
+                // Add label
+                var labelObj = new GameObject("Label");
+                labelObj.transform.SetParent(markerObj.transform, false);
+
+                var labelRect = labelObj.AddComponent<RectTransform>();
+                labelRect.anchoredPosition = new Vector2(0, -20);
+                labelRect.sizeDelta = new Vector2(50, 20);
+
+                var tmp = labelObj.AddComponent<TextMeshProUGUI>();
+                tmp.text = vor.identifier;
+                tmp.fontSize = 12;
+                tmp.color = Color.cyan;
+                tmp.alignment = TextAlignmentOptions.Center;
             }
 
-            // Set color
-            var image = markerObj.GetComponent<Image>();
-            if (image != null)
+            RectTransform marker = markerObj.GetComponent<RectTransform>();
+
+            // Set label if using prefab
+            if (vorMarkerPrefab != null)
             {
-                image.color = vorColor;
+                var label = markerObj.GetComponentInChildren<TextMeshProUGUI>();
+                if (label != null)
+                {
+                    label.text = vor.identifier;
+                }
+
+                var image = markerObj.GetComponent<Image>();
+                if (image != null)
+                {
+                    image.color = vorColor;
+                }
             }
 
             vorMarkers[vor.identifier] = marker;

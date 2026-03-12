@@ -115,6 +115,9 @@ namespace IFRTrainer.Editor
             // AdaptiveDifficulty
             CreateManagerObject<AdaptiveDifficulty>("AdaptiveDifficulty", managers.transform);
 
+            // SpriteManager
+            CreateManagerObject<SpriteManager>("SpriteManager", managers.transform);
+
             Debug.Log("Managers created successfully");
         }
 
