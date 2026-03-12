@@ -7,11 +7,35 @@ namespace IFRTrainer.UI
 {
     /// <summary>
     /// Runtime script that wires up UI button click handlers.
-    /// Attached to MainCanvas to connect buttons to game logic.
+    /// Auto-creates itself if not present in scene.
     /// </summary>
     public class ButtonWiring : MonoBehaviour
     {
+        private static ButtonWiring instance;
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+        private static void AutoCreate()
+        {
+            if (instance == null && FindFirstObjectByType<ButtonWiring>() == null)
+            {
+                var go = new GameObject("ButtonWiring");
+                instance = go.AddComponent<ButtonWiring>();
+                Debug.Log("ButtonWiring: Auto-created");
+            }
+        }
+
+        private void Awake()
+        {
+            instance = this;
+        }
+
         private void Start()
+        {
+            // Delay slightly to ensure all UI is created
+            Invoke(nameof(WireAllButtons), 0.1f);
+        }
+
+        private void WireAllButtons()
         {
             WireHeadingButtons();
             WireMissionButtons();
