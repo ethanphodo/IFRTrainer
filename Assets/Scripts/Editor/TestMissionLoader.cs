@@ -13,7 +13,7 @@ namespace IFRTrainer.Editor
     {
         [Header("Quick Load")]
         [SerializeField] private string defaultMission = "vor_intercept_001";
-        [SerializeField] private bool autoLoadOnStart = false;
+        [SerializeField] private bool autoLoadOnStart = true;
 
         [Header("Debug Display")]
         [SerializeField] private bool showDebugInfo = true;

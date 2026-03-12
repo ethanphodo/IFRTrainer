@@ -40,35 +40,58 @@ namespace IFRTrainer.UI
         private void WireButton(string name, UnityEngine.Events.UnityAction action)
         {
             var buttonObj = GameObject.Find(name);
-            if (buttonObj != null)
+            if (buttonObj == null)
             {
-                var button = buttonObj.GetComponent<Button>();
-                if (button != null)
-                {
-                    button.onClick.RemoveAllListeners();
-                    button.onClick.AddListener(action);
-                }
+                Debug.LogWarning($"ButtonWiring: Button '{name}' not found");
+                return;
             }
+
+            var button = buttonObj.GetComponent<Button>();
+            if (button == null)
+            {
+                Debug.LogWarning($"ButtonWiring: '{name}' has no Button component");
+                return;
+            }
+
+            button.onClick.RemoveAllListeners();
+            button.onClick.AddListener(action);
+            Debug.Log($"ButtonWiring: Wired button '{name}'");
         }
 
         private void AdjustHeading(float delta)
         {
             var gm = GameManager.Instance;
-            if (gm != null && gm.IsInitialized)
+            if (gm == null)
             {
-                float current = gm.CurrentDynamics.Heading;
-                float newHdg = (current + delta + 360) % 360;
-                gm.SetTargetHeading(newHdg);
-                Debug.Log($"Heading: {current:F0}° → {newHdg:F0}°");
+                Debug.LogError("ButtonWiring: GameManager.Instance is null");
+                return;
             }
+            if (!gm.IsInitialized)
+            {
+                Debug.LogWarning("ButtonWiring: GameManager not initialized yet");
+                return;
+            }
+
+            float current = gm.CurrentDynamics.Heading;
+            float newHdg = (current + delta + 360) % 360;
+            gm.SetTargetHeading(newHdg);
+            Debug.Log($"Heading: {current:F0}° → {newHdg:F0}°");
         }
 
         private void LoadMission(string missionId)
         {
             var mm = FindFirstObjectByType<MissionManager>();
-            if (mm != null)
+            if (mm == null)
             {
-                mm.LoadMission(missionId);
+                Debug.LogError("ButtonWiring: MissionManager not found!");
+                return;
+            }
+
+            Debug.Log($"ButtonWiring: Loading mission {missionId}...");
+            bool loaded = mm.LoadMission(missionId);
+
+            if (loaded)
+            {
                 mm.StartMission();
 
                 // Hide mission select overlay
@@ -76,7 +99,11 @@ namespace IFRTrainer.UI
                 if (overlay != null)
                     overlay.SetActive(false);
 
-                Debug.Log($"Loaded mission: {missionId}");
+                Debug.Log($"ButtonWiring: Mission {missionId} started!");
+            }
+            else
+            {
+                Debug.LogError($"ButtonWiring: Failed to load mission {missionId}");
             }
         }
     }
