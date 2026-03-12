@@ -1,11 +1,14 @@
 {
-    "name": "IFRTrainer",
-    "rootNamespace": "IFRTrainer",
+    "name": "IFRTrainer.Editor",
+    "rootNamespace": "IFRTrainer.Editor",
     "references": [
+        "IFRTrainer",
         "Unity.TextMeshPro",
         "Unity.ugui"
     ],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
