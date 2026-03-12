@@ -131,6 +131,16 @@ namespace IFRTrainer.Editor
             ce.transform.SetParent(managers.transform);
             ce.AddComponent<CelebrationEffects>();
 
+            // FlightRecorder - records flight data for debrief
+            var fr = new GameObject("FlightRecorder");
+            fr.transform.SetParent(managers.transform);
+            fr.AddComponent<FlightRecorder>();
+
+            // DebriefPanel - post-mission analysis
+            var dp = new GameObject("DebriefPanel");
+            dp.transform.SetParent(managers.transform);
+            dp.AddComponent<DebriefPanel>();
+
             Debug.Log("Managers created");
         }
 
