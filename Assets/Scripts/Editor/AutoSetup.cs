@@ -38,6 +38,7 @@ namespace IFRTrainer.Editor
         [MenuItem("Window/IFR Trainer/Quick Setup (Complete)")]
         public static void CreateCompleteScene()
         {
+            CreateCamera();
             CreateManagers();
             CreateUI();
             CreateTestMissionLoader();
@@ -47,6 +48,22 @@ namespace IFRTrainer.Editor
 
             Debug.Log("IFR Trainer: Complete scene setup finished!");
             Debug.Log("Use number keys 1-5 to load missions, arrow keys to adjust heading/OBS.");
+        }
+
+        private static void CreateCamera()
+        {
+            // Create Main Camera if it doesn't exist
+            if (Camera.main == null && GameObject.Find("Main Camera") == null)
+            {
+                var camObj = new GameObject("Main Camera");
+                camObj.tag = "MainCamera";
+                var cam = camObj.AddComponent<Camera>();
+                cam.clearFlags = CameraClearFlags.SolidColor;
+                cam.backgroundColor = new Color(0.1f, 0.1f, 0.15f);
+                cam.orthographic = true;
+                camObj.AddComponent<AudioListener>();
+                Debug.Log("Main Camera created");
+            }
         }
 
         private static void CreateManagers()
