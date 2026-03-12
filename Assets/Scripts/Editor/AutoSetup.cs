@@ -141,6 +141,11 @@ namespace IFRTrainer.Editor
             dp.transform.SetParent(managers.transform);
             dp.AddComponent<DebriefPanel>();
 
+            // ProgressionDashboard - main menu XP/level display
+            var pd = new GameObject("ProgressionDashboard");
+            pd.transform.SetParent(managers.transform);
+            pd.AddComponent<ProgressionDashboard>();
+
             Debug.Log("Managers created");
         }
 
