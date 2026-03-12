@@ -139,9 +139,12 @@ namespace IFRTrainer.UI
 
         private void ShowMissionBriefing(MissionData mission)
         {
-            missionSelectPanel?.SetActive(false);
-            missionBriefingPanel?.SetActive(true);
-            debriefingPanel?.SetActive(false);
+            if (missionSelectPanel != null)
+                missionSelectPanel.SetActive(false);
+            if (missionBriefingPanel != null)
+                missionBriefingPanel.SetActive(true);
+            if (debriefingPanel != null)
+                debriefingPanel.SetActive(false);
 
             if (briefingTitle != null)
             {
@@ -200,8 +203,10 @@ namespace IFRTrainer.UI
 
         public void StartSelectedMission()
         {
-            missionBriefingPanel?.SetActive(false);
-            missionManager?.StartMission();
+            if (missionBriefingPanel != null)
+                missionBriefingPanel.SetActive(false);
+            if (missionManager != null)
+                missionManager.StartMission();
         }
 
         private void OnMissionCompleted(MissionData mission, MissionResult result)
@@ -211,9 +216,12 @@ namespace IFRTrainer.UI
 
         private void ShowDebriefing(MissionData mission, MissionResult result)
         {
-            missionSelectPanel?.SetActive(false);
-            missionBriefingPanel?.SetActive(false);
-            debriefingPanel?.SetActive(true);
+            if (missionSelectPanel != null)
+                missionSelectPanel.SetActive(false);
+            if (missionBriefingPanel != null)
+                missionBriefingPanel.SetActive(false);
+            if (debriefingPanel != null)
+                debriefingPanel.SetActive(true);
 
             if (debriefTitle != null)
             {
@@ -252,9 +260,12 @@ namespace IFRTrainer.UI
 
         public void ShowMissionSelect()
         {
-            missionSelectPanel?.SetActive(true);
-            missionBriefingPanel?.SetActive(false);
-            debriefingPanel?.SetActive(false);
+            if (missionSelectPanel != null)
+                missionSelectPanel.SetActive(true);
+            if (missionBriefingPanel != null)
+                missionBriefingPanel.SetActive(false);
+            if (debriefingPanel != null)
+                debriefingPanel.SetActive(false);
         }
 
         public void RetryMission()

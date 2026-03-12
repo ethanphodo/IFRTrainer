@@ -66,68 +66,28 @@ namespace IFRTrainer.UI
                 return;
             }
 
-            // Load sprites from the sprite sheet
-            // The sprite sheet is 128x128, with 24x24 planes and 16x16 other items
-            LoadAircraftSprites();
-            LoadOtherSprites();
-        }
+            Debug.Log($"Loaded sprite sheet: {spriteSheet.width}x{spriteSheet.height}");
 
-        private void LoadAircraftSprites()
-        {
-            // Row 1 (top): white, black, gray (y=112)
-            planeWhite = CreateSprite(0, 112, 24, 24, "plane_white");
-            planeBlack = CreateSprite(24, 112, 24, 24, "plane_black");
-            planeGray = CreateSprite(48, 112, 24, 24, "plane_gray");
-
-            // Row 2: red, orange, yellow (y=88)
-            planeRed = CreateSprite(0, 88, 24, 24, "plane_red");
-            planeOrange = CreateSprite(24, 88, 24, 24, "plane_orange");
-            planeYellow = CreateSprite(48, 88, 24, 24, "plane_yellow");
-
-            // Row 3: green, teal, blue (y=64)
-            planeGreen = CreateSprite(0, 64, 24, 24, "plane_green");
-            planeTeal = CreateSprite(24, 64, 24, 24, "plane_teal");
-            planeBlue = CreateSprite(48, 64, 24, 24, "plane_blue");
-
-            // Row 4: purple, pink, brown (y=40)
-            planePurple = CreateSprite(0, 40, 24, 24, "plane_purple");
-            planePink = CreateSprite(24, 40, 24, 24, "plane_pink");
-            planeBrown = CreateSprite(48, 40, 24, 24, "plane_brown");
-
-            // Row 5: jets (y=16)
-            jetGray = CreateSprite(0, 16, 24, 24, "jet_gray");
-            jetGreen = CreateSprite(24, 16, 24, 24, "jet_green");
-            jetBlue = CreateSprite(48, 16, 24, 24, "jet_blue");
-        }
-
-        private void LoadOtherSprites()
-        {
-            // VOR station marker (we'll use one of the small sprites or create one)
-            vorStation = CreateSprite(0, 0, 16, 16, "vor_station");
-
-            // Bullets
-            bullet1 = CreateSprite(80, 120, 8, 8, "bullet_1");
-            bullet2 = CreateSprite(88, 120, 8, 8, "bullet_2");
-
-            // Explosion frames (for potential future use)
-            explosionFrames = new Sprite[6];
-            explosionFrames[0] = CreateSprite(80, 88, 16, 16, "explosion_1");
-            explosionFrames[1] = CreateSprite(96, 88, 16, 16, "explosion_2");
-            explosionFrames[2] = CreateSprite(112, 88, 16, 16, "explosion_3");
-            explosionFrames[3] = CreateSprite(80, 72, 16, 16, "explosion_4");
-            explosionFrames[4] = CreateSprite(96, 72, 16, 16, "explosion_5");
-            explosionFrames[5] = CreateSprite(112, 72, 16, 16, "explosion_6");
+            // Use generated sprites - the sprite sheet layout varies
+            // This is safer than hardcoding coordinates
+            GeneratePlaceholderSprites();
         }
 
         private Sprite CreateSprite(int x, int y, int width, int height, string name)
         {
             if (spriteSheet == null) return null;
 
-            // Unity texture coordinates start from bottom-left
+            // Validate bounds
+            if (x + width > spriteSheet.width || y + height > spriteSheet.height)
+            {
+                Debug.LogWarning($"Sprite {name} at ({x},{y},{width},{height}) exceeds texture bounds ({spriteSheet.width}x{spriteSheet.height})");
+                return null;
+            }
+
             Rect rect = new Rect(x, y, width, height);
             Vector2 pivot = new Vector2(0.5f, 0.5f);
 
-            Sprite sprite = Sprite.Create(spriteSheet, rect, pivot, 16f); // 16 pixels per unit
+            Sprite sprite = Sprite.Create(spriteSheet, rect, pivot, 16f);
             sprite.name = name;
             spriteCache[name] = sprite;
 

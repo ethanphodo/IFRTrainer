@@ -50,6 +50,12 @@ namespace IFRTrainer.Core
             }
 
             Instance = this;
+
+            // DontDestroyOnLoad only works for root objects
+            if (transform.parent != null)
+            {
+                transform.SetParent(null);
+            }
             DontDestroyOnLoad(gameObject);
 
             missionManager = GetComponent<MissionManager>();
