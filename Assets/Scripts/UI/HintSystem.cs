@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 using IFRTrainer.Core;
 using IFRTrainer.Navigation;
 using IFRTrainer.Mission;
@@ -15,7 +14,7 @@ namespace IFRTrainer.UI
     {
         [Header("UI References")]
         [SerializeField] private GameObject hintPanel;
-        [SerializeField] private TextMeshProUGUI hintText;
+        [SerializeField] private Text hintText;
         [SerializeField] private Image hintIcon;
         [SerializeField] private Button dismissButton;
 

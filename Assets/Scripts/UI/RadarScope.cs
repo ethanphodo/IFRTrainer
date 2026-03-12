@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 using IFRTrainer.Core;
 using IFRTrainer.Mission;
 
@@ -19,7 +18,7 @@ namespace IFRTrainer.UI
         [SerializeField] private RectTransform headingVector;
         [SerializeField] private Image selectedRadialLine;
         [SerializeField] private GameObject vorMarkerPrefab;
-        [SerializeField] private TextMeshProUGUI scaleText;
+        [SerializeField] private Text scaleText;
 
         [Header("Sprites")]
         [SerializeField] private Sprite playerPlaneSprite;
@@ -183,11 +182,11 @@ namespace IFRTrainer.UI
                 labelRect.anchoredPosition = new Vector2(0, -20);
                 labelRect.sizeDelta = new Vector2(50, 20);
 
-                var tmp = labelObj.AddComponent<TextMeshProUGUI>();
+                var tmp = labelObj.AddComponent<Text>();
                 tmp.text = vor.identifier;
                 tmp.fontSize = 12;
                 tmp.color = Color.cyan;
-                tmp.alignment = TextAlignmentOptions.Center;
+                tmp.alignment = TextAnchor.MiddleCenter;
             }
 
             RectTransform marker = markerObj.GetComponent<RectTransform>();
@@ -195,7 +194,7 @@ namespace IFRTrainer.UI
             // Set label if using prefab
             if (vorMarkerPrefab != null)
             {
-                var label = markerObj.GetComponentInChildren<TextMeshProUGUI>();
+                var label = markerObj.GetComponentInChildren<Text>();
                 if (label != null)
                 {
                     label.text = vor.identifier;

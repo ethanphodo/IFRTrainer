@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 using IFRTrainer.Core;
 using IFRTrainer.Navigation;
 
@@ -15,10 +14,10 @@ namespace IFRTrainer.Instruments
         [Header("UI References")]
         [SerializeField] private RectTransform cdiNeedle;
         [SerializeField] private RectTransform obsRose;
-        [SerializeField] private TextMeshProUGUI obsText;
-        [SerializeField] private TextMeshProUGUI toFromText;
-        [SerializeField] private TextMeshProUGUI frequencyText;
-        [SerializeField] private TextMeshProUGUI distanceText;
+        [SerializeField] private Text obsText;
+        [SerializeField] private Text toFromText;
+        [SerializeField] private Text frequencyText;
+        [SerializeField] private Text distanceText;
         [SerializeField] private Image toFlag;
         [SerializeField] private Image fromFlag;
         [SerializeField] private Image navFlag;

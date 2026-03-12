@@ -1,7 +1,6 @@
 using UnityEngine;
-using UnityEditor;
 using UnityEngine.UI;
-using TMPro;
+using UnityEditor;
 using IFRTrainer.Core;
 using IFRTrainer.Navigation;
 using IFRTrainer.Instruments;
@@ -558,7 +557,7 @@ namespace IFRTrainer.Editor
             return panel;
         }
 
-        private static TextMeshProUGUI CreateText(string name, Transform parent, string text, int fontSize,
+        private static Text CreateText(string name, Transform parent, string text, int fontSize,
             Vector2 anchorMin, Vector2 anchorMax, Vector2 anchoredPos, Vector2 sizeDelta)
         {
             var obj = new GameObject(name);
@@ -570,11 +569,11 @@ namespace IFRTrainer.Editor
             rect.anchoredPosition = anchoredPos;
             rect.sizeDelta = sizeDelta;
 
-            var tmp = obj.AddComponent<TextMeshProUGUI>();
+            var tmp = obj.AddComponent<Text>();
             tmp.text = text;
             tmp.fontSize = fontSize;
             tmp.color = Color.white;
-            tmp.alignment = TextAlignmentOptions.Center;
+            tmp.alignment = TextAnchor.MiddleCenter;
 
             return tmp;
         }
@@ -604,11 +603,11 @@ namespace IFRTrainer.Editor
             labelRect.offsetMin = Vector2.zero;
             labelRect.offsetMax = Vector2.zero;
 
-            var tmp = labelObj.AddComponent<TextMeshProUGUI>();
+            var tmp = labelObj.AddComponent<Text>();
             tmp.text = label;
             tmp.fontSize = 16;
             tmp.color = Color.white;
-            tmp.alignment = TextAlignmentOptions.Center;
+            tmp.alignment = TextAnchor.MiddleCenter;
 
             return btn;
         }

@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 using IFRTrainer.Core;
 
 namespace IFRTrainer.Instruments
@@ -14,8 +13,8 @@ namespace IFRTrainer.Instruments
         [Header("UI References")]
         [SerializeField] private RectTransform compassCard;
         [SerializeField] private RectTransform headingBug;
-        [SerializeField] private TextMeshProUGUI headingText;
-        [SerializeField] private TextMeshProUGUI targetHeadingText;
+        [SerializeField] private Text headingText;
+        [SerializeField] private Text targetHeadingText;
 
         [Header("Settings")]
         [SerializeField] private float smoothTime = 0.1f;

@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 using IFRTrainer.Core;
 using IFRTrainer.Instruments;
 using IFRTrainer.Mission;
@@ -19,16 +18,16 @@ namespace IFRTrainer.UI
         [SerializeField] private HeadingIndicator headingIndicator;
 
         [Header("Readout Displays")]
-        [SerializeField] private TextMeshProUGUI airspeedText;
-        [SerializeField] private TextMeshProUGUI altitudeText;
-        [SerializeField] private TextMeshProUGUI verticalSpeedText;
-        [SerializeField] private TextMeshProUGUI headingText;
+        [SerializeField] private Text airspeedText;
+        [SerializeField] private Text altitudeText;
+        [SerializeField] private Text verticalSpeedText;
+        [SerializeField] private Text headingText;
 
         [Header("Mission Info")]
-        [SerializeField] private TextMeshProUGUI missionTitleText;
-        [SerializeField] private TextMeshProUGUI objectiveText;
-        [SerializeField] private TextMeshProUGUI scoreText;
-        [SerializeField] private TextMeshProUGUI timeText;
+        [SerializeField] private Text missionTitleText;
+        [SerializeField] private Text objectiveText;
+        [SerializeField] private Text scoreText;
+        [SerializeField] private Text timeText;
 
         [Header("Heading Selection Buttons")]
         [SerializeField] private Button[] headingButtons;

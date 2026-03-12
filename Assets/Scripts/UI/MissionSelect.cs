@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 using IFRTrainer.Mission;
 
 namespace IFRTrainer.UI
@@ -20,17 +19,17 @@ namespace IFRTrainer.UI
         [SerializeField] private GameObject missionButtonPrefab;
 
         [Header("Briefing")]
-        [SerializeField] private TextMeshProUGUI briefingTitle;
-        [SerializeField] private TextMeshProUGUI briefingDescription;
-        [SerializeField] private TextMeshProUGUI briefingObjectives;
+        [SerializeField] private Text briefingTitle;
+        [SerializeField] private Text briefingDescription;
+        [SerializeField] private Text briefingObjectives;
         [SerializeField] private Button startMissionButton;
         [SerializeField] private Button backButton;
 
         [Header("Debriefing")]
-        [SerializeField] private TextMeshProUGUI debriefTitle;
-        [SerializeField] private TextMeshProUGUI debriefGrade;
-        [SerializeField] private TextMeshProUGUI debriefScore;
-        [SerializeField] private TextMeshProUGUI debriefBreakdown;
+        [SerializeField] private Text debriefTitle;
+        [SerializeField] private Text debriefGrade;
+        [SerializeField] private Text debriefScore;
+        [SerializeField] private Text debriefBreakdown;
         [SerializeField] private Button continueButton;
         [SerializeField] private Button retryButton;
 
@@ -106,7 +105,7 @@ namespace IFRTrainer.UI
         {
             GameObject buttonObj = Instantiate(missionButtonPrefab, missionListContainer);
             Button button = buttonObj.GetComponent<Button>();
-            TextMeshProUGUI label = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
+            Text label = buttonObj.GetComponentInChildren<Text>();
 
             if (label != null)
             {

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 using IFRTrainer.Progression;
 
 namespace IFRTrainer.UI
@@ -12,39 +11,39 @@ namespace IFRTrainer.UI
     public class ProgressionUI : MonoBehaviour
     {
         [Header("Level Display")]
-        [SerializeField] private TextMeshProUGUI levelText;
-        [SerializeField] private TextMeshProUGUI xpText;
+        [SerializeField] private Text levelText;
+        [SerializeField] private Text xpText;
         [SerializeField] private Slider xpProgressBar;
 
         [Header("Stats Panel")]
-        [SerializeField] private TextMeshProUGUI missionsCompletedText;
-        [SerializeField] private TextMeshProUGUI flightTimeText;
-        [SerializeField] private TextMeshProUGUI bestGradeText;
-        [SerializeField] private TextMeshProUGUI streakText;
+        [SerializeField] private Text missionsCompletedText;
+        [SerializeField] private Text flightTimeText;
+        [SerializeField] private Text bestGradeText;
+        [SerializeField] private Text streakText;
 
         [Header("Grade Distribution")]
-        [SerializeField] private TextMeshProUGUI gradesSText;
-        [SerializeField] private TextMeshProUGUI gradesAText;
-        [SerializeField] private TextMeshProUGUI gradesBText;
-        [SerializeField] private TextMeshProUGUI gradesCText;
-        [SerializeField] private TextMeshProUGUI gradesDText;
-        [SerializeField] private TextMeshProUGUI gradesFText;
+        [SerializeField] private Text gradesSText;
+        [SerializeField] private Text gradesAText;
+        [SerializeField] private Text gradesBText;
+        [SerializeField] private Text gradesCText;
+        [SerializeField] private Text gradesDText;
+        [SerializeField] private Text gradesFText;
 
         [Header("Certifications")]
         [SerializeField] private Transform certificationsContainer;
         [SerializeField] private GameObject certificationBadgePrefab;
 
         [Header("Daily Challenge")]
-        [SerializeField] private TextMeshProUGUI dailyChallengeTitle;
-        [SerializeField] private TextMeshProUGUI dailyChallengeDesc;
-        [SerializeField] private TextMeshProUGUI dailyStreakText;
-        [SerializeField] private TextMeshProUGUI dailyResetTimer;
+        [SerializeField] private Text dailyChallengeTitle;
+        [SerializeField] private Text dailyChallengeDesc;
+        [SerializeField] private Text dailyStreakText;
+        [SerializeField] private Text dailyResetTimer;
         [SerializeField] private Button playDailyButton;
         [SerializeField] private GameObject dailyCompletedBadge;
 
         [Header("Notification")]
         [SerializeField] private GameObject notificationPopup;
-        [SerializeField] private TextMeshProUGUI notificationText;
+        [SerializeField] private Text notificationText;
         [SerializeField] private Image notificationIcon;
         [SerializeField] private float notificationDuration = 3f;
 
@@ -161,7 +160,7 @@ namespace IFRTrainer.UI
                 else
                 {
                     // Fallback: just set text
-                    var text = badge.GetComponentInChildren<TextMeshProUGUI>();
+                    var text = badge.GetComponentInChildren<Text>();
                     if (text != null)
                     {
                         text.text = cert.Name;
@@ -291,8 +290,8 @@ namespace IFRTrainer.UI
     public class CertificationBadgeUI : MonoBehaviour
     {
         [SerializeField] private Image badgeIcon;
-        [SerializeField] private TextMeshProUGUI nameText;
-        [SerializeField] private TextMeshProUGUI descText;
+        [SerializeField] private Text nameText;
+        [SerializeField] private Text descText;
         [SerializeField] private Image tierBorder;
         [SerializeField] private CanvasGroup canvasGroup;
 

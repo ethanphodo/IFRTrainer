@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 using IFRTrainer.Core;
 using IFRTrainer.Mission;
 using IFRTrainer.Progression;
@@ -20,15 +19,15 @@ namespace IFRTrainer.UI
         [SerializeField] private Button endlessButton;
 
         [Header("Mode Info")]
-        [SerializeField] private TextMeshProUGUI modeNameText;
-        [SerializeField] private TextMeshProUGUI modeDescriptionText;
-        [SerializeField] private TextMeshProUGUI modeSettingsText;
+        [SerializeField] private Text modeNameText;
+        [SerializeField] private Text modeDescriptionText;
+        [SerializeField] private Text modeSettingsText;
 
         [Header("Endless Mode UI")]
         [SerializeField] private GameObject endlessModePanel;
-        [SerializeField] private TextMeshProUGUI endlessWaveText;
-        [SerializeField] private TextMeshProUGUI endlessScoreText;
-        [SerializeField] private TextMeshProUGUI endlessHighScoreText;
+        [SerializeField] private Text endlessWaveText;
+        [SerializeField] private Text endlessScoreText;
+        [SerializeField] private Text endlessHighScoreText;
         [SerializeField] private Button endlessStartButton;
         [SerializeField] private Button endlessNextWaveButton;
 
@@ -112,7 +111,7 @@ namespace IFRTrainer.UI
             button.colors = colors;
 
             // Add lock icon or text if locked
-            var lockText = button.GetComponentInChildren<TextMeshProUGUI>();
+            var lockText = button.GetComponentInChildren<Text>();
             if (lockText != null && !unlocked)
             {
                 lockText.text += " (Locked)";
