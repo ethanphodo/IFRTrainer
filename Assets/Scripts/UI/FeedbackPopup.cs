@@ -30,8 +30,6 @@ namespace IFRTrainer.UI
         [SerializeField] private Vector2 scorePopupPosition = new Vector2(200, 50);
 
         private Transform popupContainer;
-        private Queue<PopupData> popupQueue = new Queue<PopupData>();
-        private bool isShowingPopup = false;
 
         private void Awake()
         {

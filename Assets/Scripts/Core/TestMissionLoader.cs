@@ -3,7 +3,7 @@ using IFRTrainer.Core;
 using IFRTrainer.Mission;
 using IFRTrainer.Navigation;
 
-namespace IFRTrainer.Editor
+namespace IFRTrainer.Core
 {
     /// <summary>
     /// Runtime helper for testing the IFR Trainer.
