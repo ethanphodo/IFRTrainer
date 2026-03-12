@@ -1,0 +1,29 @@
+# Unity
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+*.pidb
+*.suo
+*.sln
+*.csproj
+*.unityproj
+
+# Visual Studio
+.vs/
+*.user
+
+# Native Plugin Build
+NativePlugin/build/
+*.o
+*.dSYM/
+
+# Compiled test binary
+NativePlugin/test/test_vor_math
+
+# OS
+.DS_Store
+Thumbs.db

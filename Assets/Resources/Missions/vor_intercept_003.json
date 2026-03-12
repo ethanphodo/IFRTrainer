@@ -1,0 +1,60 @@
+{
+  "mission_id": "vor_intercept_003",
+  "title": "Cross-Radial Navigation",
+  "difficulty": 3,
+  "initial_conditions": {
+    "aircraft": {
+      "latitude": 34.00,
+      "longitude": -118.50,
+      "altitude_feet": 6000,
+      "heading": 120,
+      "speed_knots": 160
+    }
+  },
+  "vor_stations": [
+    {
+      "identifier": "LAX",
+      "latitude": 33.934,
+      "longitude": -118.40,
+      "frequency_mhz": 113.6
+    },
+    {
+      "identifier": "VNY",
+      "latitude": 34.209,
+      "longitude": -118.489,
+      "frequency_mhz": 113.1
+    }
+  ],
+  "objectives": [
+    {
+      "type": "intercept_radial",
+      "station": "LAX",
+      "radial": 45,
+      "max_deviation_deg": 1.5
+    },
+    {
+      "type": "track_radial",
+      "station": "LAX",
+      "radial": 45,
+      "duration_seconds": 60,
+      "max_avg_deviation_deg": 1.0
+    },
+    {
+      "type": "intercept_radial",
+      "station": "VNY",
+      "radial": 180,
+      "max_deviation_deg": 1.5
+    },
+    {
+      "type": "track_radial",
+      "station": "VNY",
+      "radial": 180,
+      "duration_seconds": 90,
+      "max_avg_deviation_deg": 0.8
+    }
+  ],
+  "scoring": {
+    "time_bonus_threshold_seconds": 300,
+    "deviation_penalty_per_degree": 7
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "mission_id": "emergency_002",
+  "title": "Instrument Partial Failure",
+  "difficulty": 5,
+  "description": "Your CDI will experience intermittent failures. Trust your last known position and use timing for navigation.",
+  "emergency_type": "instrument_failure",
+  "initial_conditions": {
+    "aircraft": {
+      "latitude": 34.10,
+      "longitude": -118.30,
+      "altitude_feet": 7000,
+      "heading": 225,
+      "speed_knots": 160
+    }
+  },
+  "vor_stations": [
+    {
+      "identifier": "LAX",
+      "latitude": 33.934,
+      "longitude": -118.40,
+      "frequency_mhz": 113.6
+    },
+    {
+      "identifier": "VNY",
+      "latitude": 34.209,
+      "longitude": -118.489,
+      "frequency_mhz": 113.1
+    }
+  ],
+  "objectives": [
+    {
+      "type": "intercept_radial",
+      "station": "LAX",
+      "radial": 360,
+      "max_deviation_deg": 2.0
+    },
+    {
+      "type": "track_radial",
+      "station": "LAX",
+      "radial": 360,
+      "duration_seconds": 120,
+      "max_avg_deviation_deg": 1.5
+    },
+    {
+      "type": "intercept_radial",
+      "station": "VNY",
+      "radial": 180,
+      "max_deviation_deg": 2.5
+    },
+    {
+      "type": "track_radial",
+      "station": "VNY",
+      "radial": 180,
+      "duration_seconds": 90,
+      "max_avg_deviation_deg": 1.5
+    }
+  ],
+  "events": [
+    {
+      "type": "cdi_failure",
+      "trigger_time_seconds": 60,
+      "duration_seconds": 30
+    },
+    {
+      "type": "cdi_failure",
+      "trigger_time_seconds": 180,
+      "duration_seconds": 45
+    }
+  ],
+  "scoring": {
+    "time_bonus_threshold_seconds": 420,
+    "deviation_penalty_per_degree": 4,
+    "emergency_bonus": 75
+  }
+}

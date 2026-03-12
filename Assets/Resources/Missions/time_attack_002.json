@@ -1,0 +1,58 @@
+{
+  "mission_id": "time_attack_002",
+  "title": "Double Intercept Sprint",
+  "difficulty": 3,
+  "description": "Intercept two radials in sequence. Every second counts - plan your route wisely!",
+  "game_mode": "time_attack",
+  "time_limit_seconds": 180,
+  "initial_conditions": {
+    "aircraft": {
+      "latitude": 34.00,
+      "longitude": -118.35,
+      "altitude_feet": 6000,
+      "heading": 180,
+      "speed_knots": 170
+    }
+  },
+  "vor_stations": [
+    {
+      "identifier": "LAX",
+      "latitude": 33.934,
+      "longitude": -118.40,
+      "frequency_mhz": 113.6
+    }
+  ],
+  "objectives": [
+    {
+      "type": "intercept_radial",
+      "station": "LAX",
+      "radial": 360,
+      "max_deviation_deg": 2.5
+    },
+    {
+      "type": "track_radial",
+      "station": "LAX",
+      "radial": 360,
+      "duration_seconds": 20,
+      "max_avg_deviation_deg": 1.5
+    },
+    {
+      "type": "intercept_radial",
+      "station": "LAX",
+      "radial": 270,
+      "max_deviation_deg": 2.5
+    },
+    {
+      "type": "track_radial",
+      "station": "LAX",
+      "radial": 270,
+      "duration_seconds": 20,
+      "max_avg_deviation_deg": 1.5
+    }
+  ],
+  "scoring": {
+    "time_bonus_threshold_seconds": 90,
+    "time_bonus_per_second": 4,
+    "deviation_penalty_per_degree": 4
+  }
+}

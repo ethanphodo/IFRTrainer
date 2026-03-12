@@ -1,0 +1,45 @@
+{
+  "mission_id": "time_attack_001",
+  "title": "Speed Intercept",
+  "difficulty": 2,
+  "description": "Race against the clock! Intercept and briefly track the radial as fast as possible.",
+  "game_mode": "time_attack",
+  "time_limit_seconds": 120,
+  "initial_conditions": {
+    "aircraft": {
+      "latitude": 33.95,
+      "longitude": -118.30,
+      "altitude_feet": 5000,
+      "heading": 315,
+      "speed_knots": 160
+    }
+  },
+  "vor_stations": [
+    {
+      "identifier": "LAX",
+      "latitude": 33.934,
+      "longitude": -118.40,
+      "frequency_mhz": 113.6
+    }
+  ],
+  "objectives": [
+    {
+      "type": "intercept_radial",
+      "station": "LAX",
+      "radial": 90,
+      "max_deviation_deg": 3.0
+    },
+    {
+      "type": "track_radial",
+      "station": "LAX",
+      "radial": 90,
+      "duration_seconds": 30,
+      "max_avg_deviation_deg": 2.0
+    }
+  ],
+  "scoring": {
+    "time_bonus_threshold_seconds": 60,
+    "time_bonus_per_second": 3,
+    "deviation_penalty_per_degree": 3
+  }
+}
