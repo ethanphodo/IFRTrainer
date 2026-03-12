@@ -107,6 +107,7 @@ namespace IFRTrainer.Editor
             scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
             scaler.referenceResolution = new Vector2(1920, 1080);
             canvasObj.AddComponent<GraphicRaycaster>();
+            canvasObj.AddComponent<ButtonWiring>(); // Wire up buttons at runtime
 
             // EventSystem
             if (Object.FindFirstObjectByType<UnityEngine.EventSystems.EventSystem>() == null)
