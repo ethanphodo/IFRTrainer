@@ -116,6 +116,21 @@ namespace IFRTrainer.Editor
             bw.transform.SetParent(managers.transform);
             bw.AddComponent<ButtonWiring>();
 
+            // FlightFeedback - in-flight dopamine hits
+            var ff = new GameObject("FlightFeedback");
+            ff.transform.SetParent(managers.transform);
+            ff.AddComponent<FlightFeedback>();
+
+            // FeedbackPopup - animated score popups
+            var fp = new GameObject("FeedbackPopup");
+            fp.transform.SetParent(managers.transform);
+            fp.AddComponent<FeedbackPopup>();
+
+            // CelebrationEffects - confetti and celebrations
+            var ce = new GameObject("CelebrationEffects");
+            ce.transform.SetParent(managers.transform);
+            ce.AddComponent<CelebrationEffects>();
+
             Debug.Log("Managers created");
         }
 
