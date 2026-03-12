@@ -344,7 +344,7 @@ namespace IFRTrainer.UI
                 if (challenge != null)
                 {
                     string status = DailyChallengeManager.Instance.HasCompletedToday ? " ✓" : "";
-                    dailyChallengeText.text = $"{challenge.Title}{status}\n+{challenge.BonusXP} XP";
+                    dailyChallengeText.text = $"{challenge.Title}{status}\n+{challenge.StreakBonus} bonus";
                 }
             }
             else
