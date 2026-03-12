@@ -94,6 +94,11 @@ namespace IFRTrainer.Editor
             sm.transform.SetParent(managers.transform);
             sm.AddComponent<SpriteManager>();
 
+            // ButtonWiring - wires up UI buttons at runtime
+            var bw = new GameObject("ButtonWiring");
+            bw.transform.SetParent(managers.transform);
+            bw.AddComponent<ButtonWiring>();
+
             Debug.Log("Managers created");
         }
 

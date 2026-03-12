@@ -7,39 +7,69 @@ namespace IFRTrainer.UI
 {
     /// <summary>
     /// Runtime script that wires up UI button click handlers.
-    /// Auto-creates itself if not present in scene.
+    /// Runs every frame until buttons are found and wired.
     /// </summary>
     public class ButtonWiring : MonoBehaviour
     {
-        private static ButtonWiring instance;
+        private bool hasWiredButtons = false;
+        private float retryTimer = 0f;
 
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
-        private static void AutoCreate()
+        private void Update()
         {
-            if (instance == null && FindFirstObjectByType<ButtonWiring>() == null)
+            if (hasWiredButtons)
+                return;
+
+            retryTimer += Time.deltaTime;
+            if (retryTimer > 0.5f)
             {
-                var go = new GameObject("ButtonWiring");
-                instance = go.AddComponent<ButtonWiring>();
-                Debug.Log("ButtonWiring: Auto-created");
+                retryTimer = 0f;
+                TryWireButtons();
             }
         }
 
-        private void Awake()
+        private void TryWireButtons()
         {
-            instance = this;
+            // Find all buttons in the scene
+            var allButtons = FindObjectsByType<Button>(FindObjectsSortMode.None);
+            Debug.Log($"ButtonWiring: Found {allButtons.Length} buttons in scene");
+
+            if (allButtons.Length == 0)
+                return;
+
+            int wiredCount = 0;
+
+            foreach (var btn in allButtons)
+            {
+                string name = btn.gameObject.name;
+
+                // Wire mission buttons
+                if (name.StartsWith("vor_") || name.StartsWith("time_") || name.StartsWith("emergency_"))
+                {
+                    string missionId = name;
+                    btn.onClick.RemoveAllListeners();
+                    btn.onClick.AddListener(() => LoadMission(missionId));
+                    Debug.Log($"ButtonWiring: Wired mission button '{name}'");
+                    wiredCount++;
+                }
+                // Wire heading buttons
+                else if (name == "L30") { WireHeadingButton(btn, -30); wiredCount++; }
+                else if (name == "L10") { WireHeadingButton(btn, -10); wiredCount++; }
+                else if (name == "R10") { WireHeadingButton(btn, 10); wiredCount++; }
+                else if (name == "R30") { WireHeadingButton(btn, 30); wiredCount++; }
+            }
+
+            if (wiredCount > 0)
+            {
+                hasWiredButtons = true;
+                Debug.Log($"ButtonWiring: Successfully wired {wiredCount} buttons!");
+            }
         }
 
-        private void Start()
+        private void WireHeadingButton(Button btn, float delta)
         {
-            // Delay slightly to ensure all UI is created
-            Invoke(nameof(WireAllButtons), 0.1f);
-        }
-
-        private void WireAllButtons()
-        {
-            WireHeadingButtons();
-            WireMissionButtons();
-            Debug.Log("ButtonWiring: UI buttons connected");
+            btn.onClick.RemoveAllListeners();
+            btn.onClick.AddListener(() => AdjustHeading(delta));
+            Debug.Log($"ButtonWiring: Wired heading button '{btn.name}' ({delta:+0;-0}°)");
         }
 
         private void WireHeadingButtons()
